@@ -5,6 +5,7 @@
 #endif
 
 #include "oneapi/math/types.hpp"
+#include "oneapi/math/exceptions.hpp"
 
 #include "oneapi/math/blas/detail/csasim/onemath_blas_csasim.hpp"
 #include "oneapi/math/detail/export.hpp"
