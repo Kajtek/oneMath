@@ -133,7 +133,7 @@ foreach(domain ${TEST_TARGET_DOMAINS})
     endif()
   endif()
 
-  if(domain STREQUAL "blas" AND ENABLE_CSASIM_BACKEND)
+  if(domain STREQUAL "blas" AND ENABLE_CSASIM_BACKEND AND UNIX)
     add_dependencies(test_main_${domain}_ct onemath_blas_csasim)
     if(BUILD_SHARED_LIBS)
       list(APPEND ONEMATH_LIBRARIES_${domain} onemath_blas_csasim)
