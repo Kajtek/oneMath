@@ -19,7 +19,7 @@ namespace csasim {
 
 void asum(sycl::queue& queue, std::int64_t n, sycl::buffer<float, 1>& x, std::int64_t incx,
           sycl::buffer<float, 1>& result) {
-    throw std::runtime_error("Not implemented for csasim");
+    throw oneapi::math::unimplemented("blas", "asum", "for csasim");
 }
 
 extern "C" ONEMATH_EXPORT blas_function_table_t onemath_blas_table = { WRAPPER_VERSION, nullptr,
