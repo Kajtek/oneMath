@@ -35,7 +35,7 @@ endif()
 option(BUILD_SHARED_LIBS "Build dynamic libraries" ON)
 
 ## Backends
-option(ENABLE_CSASIM_BACKEND "Enable the CSA Simulator backed for supported interfaces" ON)
+option(ENABLE_CSASIM_BACKEND "Enable the CSA Simulator backend for supported interfaces" ON)
 option(ENABLE_MKLCPU_BACKEND "Enable the Intel oneMKL CPU backend for supported interfaces" ON)
 option(ENABLE_MKLGPU_BACKEND "Enable the Intel oneMKL GPU backend for supported interfaces" ON)
 if(ENABLE_MKLCPU_BACKEND)
