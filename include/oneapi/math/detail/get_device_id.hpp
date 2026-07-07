@@ -43,11 +43,6 @@ namespace math {
 inline oneapi::math::device get_device_id(sycl::queue& queue) {
     oneapi::math::device device_id;
 
-#ifdef ONEMATH_ENABLE_CSASIM_BACKEND
-    if (queue.get_device().is_accelerator())
-        device_id = device::csasim;
-#endif
-
 #ifdef __x86_64__
     if (queue.get_device().is_cpu())
         device_id = device::x86cpu;
@@ -62,6 +57,10 @@ inline oneapi::math::device get_device_id(sycl::queue& queue) {
     else if (queue.is_host())
         device_id = device::aarch64cpu;
 #endif
+#endif
+#ifdef ONEMATH_ENABLE_CSASIM_BACKEND
+    else if (queue.get_device().is_accelerator())
+        device_id = device::csasim;
 #endif
     else if (queue.get_device().is_gpu()) {
         unsigned int vendor_id =

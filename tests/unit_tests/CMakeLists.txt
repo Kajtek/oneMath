@@ -93,7 +93,6 @@ set(sparse_blas_TEST_LIST
 
 set(sparse_blas_TEST_LINK "")
 
-  message("BEFORE FOREACH =========================================")
 foreach(domain ${TEST_TARGET_DOMAINS})
   # Generate RT and CT test lists
   set(${domain}_TEST_LIST_RT ${${domain}_TEST_LIST})
