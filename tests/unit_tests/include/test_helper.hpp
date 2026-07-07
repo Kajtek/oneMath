@@ -105,6 +105,13 @@
 #define TEST_RUN_INTELCPU_SELECT(q, func, ...)
 #endif
 
+#ifdef ONEMATH_ENABLE_CSASIM_BACKEND
+#define TEST_RUN_NEWDEVICE(q, func, ...) \
+    func(oneapi::math::backend_selector<oneapi::math::backend::csasim>{ q }, __VA_ARGS__)
+#else
+#define TEST_RUN_NEWDEVICE(q, func, ...)
+#endif
+
 #ifdef ONEMATH_ENABLE_MKLGPU_BACKEND
 #define TEST_RUN_INTELGPU_SELECT_NO_ARGS(q, func) \
     func(oneapi::math::backend_selector<oneapi::math::backend::mklgpu>{ q })
@@ -238,6 +245,9 @@
     do {                                                                   \
         if (CHECK_HOST_OR_CPU(q))                                          \
             TEST_RUN_INTELCPU_SELECT(q, func, __VA_ARGS__);                \
+        else if (q.get_device().is_accelerator()) {                        \
+            TEST_RUN_NEWDEVICE(q, func, args);                             \
+        }                                                                  \
         else if (q.get_device().is_gpu()) {                                \
             unsigned int vendor_id = static_cast<unsigned int>(            \
                 q.get_device().get_info<sycl::info::device::vendor_id>()); \

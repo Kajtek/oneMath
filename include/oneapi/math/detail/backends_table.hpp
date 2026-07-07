@@ -40,12 +40,26 @@
 namespace oneapi {
 namespace math {
 
-enum class device : uint16_t { x86cpu, aarch64cpu, intelgpu, nvidiagpu, amdgpu, generic_device };
+enum class device : uint16_t {
+    csasim,
+    x86cpu,
+    aarch64cpu,
+    intelgpu,
+    nvidiagpu,
+    amdgpu,
+    generic_device
+};
 enum class domain : uint16_t { blas, dft, lapack, rng, sparse_blas };
 
 static std::map<domain, std::map<device, std::vector<const char*>>> libraries = {
     { domain::blas,
-      { { device::x86cpu,
+      { { device::csasim,
+          {
+#ifdef ONEMATH_ENABLE_CSASIM_BACKEND
+              LIB_NAME("blas_csasim"),
+#endif
+          } },
+        { device::x86cpu,
           {
 #ifdef ONEMATH_ENABLE_MKLCPU_BACKEND
               LIB_NAME("blas_mklcpu"),

@@ -93,6 +93,7 @@ set(sparse_blas_TEST_LIST
 
 set(sparse_blas_TEST_LINK "")
 
+  message("BEFORE FOREACH =========================================")
 foreach(domain ${TEST_TARGET_DOMAINS})
   # Generate RT and CT test lists
   set(${domain}_TEST_LIST_RT ${${domain}_TEST_LIST})
@@ -130,6 +131,19 @@ foreach(domain ${TEST_TARGET_DOMAINS})
     )
     if (USE_ADD_SYCL_TO_TARGET_INTEGRATION)
       add_sycl_to_target(TARGET test_main_${domain}_rt SOURCES main_test.cpp)
+    endif()
+  endif()
+
+  message("INSIDE =========================================")
+  if(ENABLE_CSASIM_BACKEND)
+      message("BUILD==================================================================")
+    add_dependencies(test_main_ct onemath_blas_csasim)
+    if(BUILD_SHARED_LIBS)
+        list(APPEND ONEMATH_LIBRARIES onemath_blas_csasim)
+    else()
+        list(APPEND ONEMATH_LIBRARIES -foffload-static-lib=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libonemath_blas_csasim.a)
+        find_package(CSASIM REQUIRED)
+      list(APPEND ONEMATH_LIBRARIES ONEMATH::CSASIM::CSASIM)
     endif()
   endif()
 

@@ -35,6 +35,7 @@ endif()
 option(BUILD_SHARED_LIBS "Build dynamic libraries" ON)
 
 ## Backends
+option(ENABLE_CSASIM_BACKEND "Enable the CSA Simulator backed for supported interfaces" ON)
 option(ENABLE_MKLCPU_BACKEND "Enable the Intel oneMKL CPU backend for supported interfaces" ON)
 option(ENABLE_MKLGPU_BACKEND "Enable the Intel oneMKL GPU backend for supported interfaces" ON)
 if(ENABLE_MKLCPU_BACKEND)
@@ -91,12 +92,13 @@ endif()
 
 ## Supported domains
 set(DOMAINS_LIST "")
-if(ENABLE_MKLCPU_BACKEND
+if(ENABLE_CSASIM_BACKEND
+        OR ENABLE_MKLCPU_BACKEND
         OR ENABLE_MKLGPU_BACKEND
         OR ENABLE_CUBLAS_BACKEND
         OR ENABLE_ROCBLAS_BACKEND
         OR ENABLE_NETLIB_BACKEND
-		OR ENABLE_OPENBLAS_BACKEND
+		    OR ENABLE_OPENBLAS_BACKEND
         OR ENABLE_GENERIC_BLAS_BACKEND
         OR ENABLE_ARMPL_BACKEND)
   list(APPEND DOMAINS_LIST "blas")
