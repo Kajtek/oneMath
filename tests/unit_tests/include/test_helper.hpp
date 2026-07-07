@@ -246,7 +246,7 @@
         if (CHECK_HOST_OR_CPU(q))                                          \
             TEST_RUN_INTELCPU_SELECT(q, func, __VA_ARGS__);                \
         else if (q.get_device().is_accelerator()) {                        \
-            TEST_RUN_NEWDEVICE(q, func, args);                             \
+            TEST_RUN_NEWDEVICE(q, func, __VA_ARGS__);
         }                                                                  \
         else if (q.get_device().is_gpu()) {                                \
             unsigned int vendor_id = static_cast<unsigned int>(            \
