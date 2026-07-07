@@ -83,6 +83,7 @@ function(generate_header_file)
   # the corresponding generated macro. This is done to be conformant with ES.33
   # C++ Core Guidelines
   set(ONEMATH_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
+  set(ONEMATH_ENABLE_CSASIM_BACKEND ${ENABLE_CSASIM_BACKEND})
   set(ONEMATH_ENABLE_MKLCPU_BACKEND ${ENABLE_MKLCPU_BACKEND})
   set(ONEMATH_ENABLE_MKLGPU_BACKEND ${ENABLE_MKLGPU_BACKEND})
   set(ONEMATH_ENABLE_CUBLAS_BACKEND ${ENABLE_CUBLAS_BACKEND})

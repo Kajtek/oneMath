@@ -32,8 +32,11 @@
 #include "oneapi/math/types.hpp"
 
 #include "oneapi/math/detail/get_device_id.hpp"
-
 #include "oneapi/math/blas/detail/blas_loader.hpp"
+
+#ifdef ONEMATH_ENABLE_CSASIM_BACKEND
+#include "oneapi/math/blas/detail/csasim/blas_ct.hpp"
+#endif
 #ifdef ONEMATH_ENABLE_CUBLAS_BACKEND
 #include "oneapi/math/blas/detail/cublas/blas_ct.hpp"
 #endif

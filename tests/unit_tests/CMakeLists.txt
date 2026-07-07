@@ -133,6 +133,18 @@ foreach(domain ${TEST_TARGET_DOMAINS})
     endif()
   endif()
 
+  if(domain STREQUAL "blas" AND ENABLE_CSASIM_BACKEND AND UNIX)
+    add_dependencies(test_main_${domain}_ct onemath_blas_csasim)
+    if(BUILD_SHARED_LIBS)
+      list(APPEND ONEMATH_LIBRARIES_${domain} onemath_blas_csasim)
+    else()
+      list(APPEND ONEMATH_LIBRARIES_${domain}
+           -foffload-static-lib=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libonemath_blas_csasim.a)
+      find_package(CSASIM REQUIRED)
+      list(APPEND ONEMATH_LIBRARIES_${domain} ONEMATH::CSASIM::CSASIM)
+    endif()
+  endif()
+
   if(ENABLE_MKLCPU_BACKEND)
     add_dependencies(test_main_${domain}_ct onemath_${domain}_mklcpu)
     list(APPEND ONEMATH_LIBRARIES_${domain} onemath_${domain}_mklcpu)

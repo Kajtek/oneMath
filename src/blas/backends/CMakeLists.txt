@@ -20,6 +20,10 @@
 add_custom_target(onemath_backend_libs_blas)
 add_dependencies(onemath_backend_libs onemath_backend_libs_blas)
 
+if(ENABLE_CSASIM_BACKEND AND UNIX)
+  add_subdirectory(csasim)
+endif()
+
 if(ENABLE_MKLCPU_BACKEND)
   add_subdirectory(mklcpu)
 endif()

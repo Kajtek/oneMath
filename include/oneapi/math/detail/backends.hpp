@@ -27,6 +27,7 @@ namespace oneapi {
 namespace math {
 
 enum class backend {
+    csasim,
     mklcpu,
     mklgpu,
     cublas,
@@ -52,7 +53,8 @@ typedef std::map<backend, std::string> backendmap;
 // clang-format alternate the formatting depending on the parity of the number of backends
 // It is disabled to reduce noise
 // clang-format off
-static backendmap backend_map = { { backend::mklcpu, "mklcpu" },
+static backendmap backend_map = { { backend::csasim, "csasim" },
+                                  { backend::mklcpu, "mklcpu" },
                                   { backend::mklgpu, "mklgpu" },
                                   { backend::cublas, "cublas" },
                                   { backend::cusolver, "cusolver" },
