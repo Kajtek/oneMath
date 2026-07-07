@@ -21,4 +21,4 @@ void asum(sycl::queue& queue, std::int64_t n, sycl::buffer<float, 1>& x, std::in
 } // namespace math
 } // namespace oneapi
 
-#endif //_ONEMATH_BLAS_CSASIM_HPP_
+#endif // _ONEMATH_BLAS_CSASIM_HPP_
